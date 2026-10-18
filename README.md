@@ -1,6 +1,6 @@
 # TrayBAK
 
-Version v0.0.25
+Version v1.0.0
 
 A small Windows tray app that backs up folders to zip files on a schedule.
 
