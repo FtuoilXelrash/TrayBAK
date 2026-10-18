@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrayBAK Help</title>
+<style>
+:root {
+  --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --border: #d1d9e0; --code-bg: #f6f8fa;
+  --accent: #0969da; --ok: #1a7f37; --warn: #9a6700; --err: #cf222e; --note-bg: #ddf4ff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0d1117; --fg: #e6edf3; --muted: #9198a1; --border: #3d444d; --code-bg: #151b23;
+    --accent: #4493f8; --ok: #3fb950; --warn: #d29922; --err: #f85149; --note-bg: #10243e;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 "Segoe UI", system-ui, sans-serif; }
+.layout { display: flex; max-width: 1100px; margin: 0 auto; }
+nav { position: sticky; top: 0; align-self: flex-start; height: 100vh; overflow-y: auto; width: 240px; padding: 32px 16px; border-right: 1px solid var(--border); flex-shrink: 0; }
+nav h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 0 0 8px; }
+nav a { display: block; padding: 3px 0; color: var(--fg); text-decoration: none; font-size: 14px; }
+nav a:hover { color: var(--accent); }
+main { padding: 32px 40px 80px; min-width: 0; flex: 1; }
+h1 { font-size: 2em; margin: 0 0 4px; }
+h2 { font-size: 1.5em; margin: 2em 0 .5em; padding-bottom: .3em; border-bottom: 1px solid var(--border); }
+h3 { font-size: 1.15em; margin: 1.5em 0 .4em; }
+p, li { max-width: 72ch; }
+.lead { color: var(--muted); margin-top: 0; }
+code { background: var(--code-bg); border: 1px solid var(--border); border-radius: 5px; padding: .1em .4em; font: 0.88em Consolas, monospace; }
+pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; overflow-x: auto; }
+pre code { border: 0; padding: 0; background: none; }
+table { border-collapse: collapse; margin: 1em 0; width: 100%; max-width: 760px; }
+th, td { border: 1px solid var(--border); padding: 6px 12px; text-align: left; vertical-align: top; font-size: 15px; }
+th { background: var(--code-bg); }
+.note { background: var(--note-bg); border-left: 4px solid var(--accent); padding: 10px 16px; border-radius: 4px; max-width: 72ch; }
+.warn { border-left-color: var(--warn); }
+kbd { background: var(--code-bg); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 0 6px; font: 0.85em Consolas, monospace; }
+@media (max-width: 760px) { nav { display: none; } main { padding: 20px 16px 60px; } }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <h2>TrayBAK</h2>
+  <a href="#overview">Overview</a>
+  <a href="#start">Quick start</a>
+  <a href="#main">The main window</a>
+  <a href="#jobs">Backup jobs</a>
+  <a href="#schedules">Schedules</a>
+  <a href="#pick">Choosing files and folders</a>
+  <a href="#excludes">Excluding files</a>
+  <a href="#naming">Backup files and naming</a>
+  <a href="#retention">Keeping backups</a>
+  <a href="#restore">Restoring</a>
+  <a href="#tray">The tray icon</a>
+  <a href="#alerts">Alerts</a>
+  <a href="#log">The log</a>
+  <a href="#options">Options</a>
+  <a href="#files">Where things are stored</a>
+  <a href="#troubleshooting">Troubleshooting</a>
+</nav>
+<main>
+<h1>TrayBAK Help</h1>
+<p class="lead">Scheduled folder backups from the Windows system tray.</p>
+
+<h2 id="overview">Overview</h2>
+<p>TrayBAK backs up folders on a schedule and keeps running quietly in the notification area of the taskbar. Each folder you want to protect is a <strong>job</strong>. Every job has its own source folder, backup folder, schedule, retention rules and alert settings.</p>
+<ul>
+  <li>Backups are standard <code>.zip</code> files you can open with Windows Explorer or any archive tool.</li>
+  <li>Up to 10 jobs.</li>
+  <li>Back up a whole folder, or only the files and folders you tick.</li>
+  <li>Schedules: manual, every X minutes, hourly, daily at a set time, or weekly on chosen days.</li>
+  <li>A failed scheduled backup is retried automatically.</li>
+  <li>Old backups are removed automatically by age and by count.</li>
+  <li>A full action log records every backup, failure, and change.</li>
+  <li>Alerts are local: a popup near the tray and a sound. Nothing is sent over the network.</li>
+</ul>
+
+<h3>Requirements</h3>
+<ul>
+  <li>Windows 10 or 11, 64 bit.</li>
+  <li>The Microsoft .NET 10 Desktop Runtime must be installed on the PC. TrayBAK does not bundle it.</li>
+  <li>TrayBAK is portable: copy its folder anywhere you can write to and run <code>TrayBAK.exe</code>. See <a href="#files">Where things are stored</a>.</li>
+</ul>
+
+<h2 id="start">Quick start</h2>
+<ol>
+  <li>Open TrayBAK and choose <strong>Add job</strong>.</li>
+  <li>Give the job a name, pick the folder to back up and the folder where backups should be stored.</li>
+  <li>Choose a schedule. A new job starts as <em>Daily at a set time</em> at <code>12:00</code>. Change the type or time as needed, for example to <code>03:50</code>.</li>
+  <li>Set how long to keep backups, for example 30 days.</li>
+  <li>Choose <strong>Save</strong>. Select the job and choose <strong>Run now</strong> to test it.</li>
+  <li>Close the window. TrayBAK keeps running in the tray and runs the job on schedule.</li>
+</ol>
+<div class="note"><strong>Example: a daily server folder backup.</strong> Source folder: the folder to protect. Schedule: Daily at 03:50. Keep: delete backups older than 30 days. The result is one zip per day and the most recent 30 days available at any time.</div>
+
+<h2 id="main">The main window</h2>
+<p>Open it by double-clicking the tray icon or from the tray menu. Press <kbd>F1</kbd> or choose <strong>Help &gt; TrayBAK Help</strong> to open this page. TrayBAK remembers where you leave the window and how big it is.</p>
+<table>
+  <tr><th>Column</th><th>Shows</th></tr>
+  <tr><td>On</td><td>Tick to enable the job, untick to disable it.</td></tr>
+  <tr><td>Job</td><td>The job name.</td></tr>
+  <tr><td>Schedule</td><td>For example <em>Daily at 12:00</em> or <em>Mon, Fri at 06:00</em>.</td></tr>
+  <tr><td>Status</td><td><em>Idle</em>, <em>Running</em>, <em>Queued</em> or <em>Disabled</em>.</td></tr>
+  <tr><td>Last run</td><td>When the job last ran, or <em>Never</em>.</td></tr>
+  <tr><td>Result</td><td><em>Success</em>, <em>Failed</em> or <em>Cancelled</em>, in green, red or amber.</td></tr>
+  <tr><td>Size</td><td>Size of the last successful backup.</td></tr>
+  <tr><td>Next run</td><td>When the job runs next, or <em>Manual</em>, <em>Paused</em>, or <em>Retry</em> with a time while a retry is waiting.</td></tr>
+  <tr><td>Details</td><td>The result of the last run: files, size, skipped files and old backups removed, or the reason it failed.</td></tr>
+</table>
+<p>The buttons above the list are <strong>Add job</strong>, <strong>Edit</strong>, <strong>Delete</strong>, <strong>Run now</strong>, <strong>Stop</strong> and <strong>Open backups</strong>. The lower half shows the newest log entries, and the status bar shows how many of the 10 jobs are used and what runs next.</p>
+<table>
+  <tr><th>Menu</th><th>Contains</th></tr>
+  <tr><td>File</td><td>Add job, Run all jobs now, Exit.</td></tr>
+  <tr><td>View</td><td>Log viewer, Open logs folder.</td></tr>
+  <tr><td>Tools</td><td>Pause scheduling, Options.</td></tr>
+  <tr><td>Help</td><td>TrayBAK Help, About TrayBAK.</td></tr>
+</table>
+
+<h2 id="jobs">Backup jobs</h2>
+<table>
+  <tr><th>Setting</th><th>What it does</th></tr>
+  <tr><td>Name</td><td>Shown in the app and used in the backup file name. Must be unique.</td></tr>
+  <tr><td>Source folder</td><td>The folder to back up, including all sub folders.</td></tr>
+  <tr><td>Backup folder</td><td>Where backups are stored. It is created if missing. It can be on another drive or a network share. TrayBAK creates a sub folder named after the job inside it for the zip files.</td></tr>
+  <tr><td>Job enabled</td><td>A disabled job never runs on its own. You can still run it by hand.</td></tr>
+  <tr><td>What to back up</td><td>Everything in the source folder, or only the files and folders you tick. See <a href="#pick">Choosing files and folders</a>.</td></tr>
+  <tr><td>Exclude</td><td>Files and folders to leave out by name or pattern. See <a href="#excludes">Excluding files</a>.</td></tr>
+  <tr><td>Schedule</td><td>When the job runs. See <a href="#schedules">Schedules</a>.</td></tr>
+  <tr><td>Keep backups</td><td>How many backups to keep. See <a href="#retention">Keeping backups</a>.</td></tr>
+  <tr><td>Alerts</td><td>Whether to alert when the job completes or fails.</td></tr>
+</table>
+<p>Select a job in the main window and use <strong>Edit</strong>, <strong>Delete</strong>, <strong>Run now</strong>, <strong>Stop</strong>, or <strong>Open backups</strong>. Double-click a job to edit it. A job that is running cannot be edited or deleted.</p>
+<p>Deleting a job never deletes its backup files.</p>
+<div class="note warn"><strong>Renaming a job:</strong> the name is part of the backup file names. After renaming, older backups keep the old name and are no longer cleaned up by the job. Delete them by hand when they are no longer needed.</div>
+
+<h2 id="schedules">Schedules</h2>
+<table>
+  <tr><th>Type</th><th>Behaviour</th></tr>
+  <tr><td>Manual only</td><td>Runs only when you start it from the app or the tray.</td></tr>
+  <tr><td>Every X minutes</td><td>Runs again X minutes after the previous run started. Range 1 to 10080.</td></tr>
+  <tr><td>Hourly</td><td>Runs once an hour at the chosen minute, for example :30.</td></tr>
+  <tr><td>Daily</td><td>Runs every day at a 24 hour time such as <code>03:50</code>. New jobs start as Daily at <code>12:00</code>.</td></tr>
+  <tr><td>Weekly</td><td>Runs on the days you tick, at the chosen time.</td></tr>
+</table>
+<h3>Missed backups</h3>
+<p>If TrayBAK was closed or the PC was off at the scheduled time, the job runs as soon as TrayBAK is running again, provided <em>Run a missed backup</em> is ticked on the job. If it is not ticked, the missed run is skipped and the job waits for its next scheduled time.</p>
+<h3>One at a time</h3>
+<p>Only one backup runs at a time. If several jobs are due together, the others wait in a queue and show <em>Queued</em>.</p>
+<h3>Retrying a failed backup</h3>
+<p>If a scheduled backup fails, for example because the backup drive was offline, TrayBAK tries again after a short wait. The number of tries and the wait are set in <strong>Tools &gt; Options</strong> (default: up to 3 retries, 10 minutes apart). The <em>Next run</em> column shows <code>Retry</code> and the time while a retry is waiting.</p>
+<ul>
+  <li>Only scheduled backups are retried. A backup you start by hand is not.</li>
+  <li>If the next scheduled time arrives first, that run goes ahead and replaces the pending retry.</li>
+  <li>The failure alert is shown only when the last try fails. Every try is recorded in the log.</li>
+  <li>Retries are forgotten when TrayBAK exits. The job simply runs at its next scheduled time.</li>
+</ul>
+<h3>Pausing</h3>
+<p>Use <strong>Tools &gt; Pause scheduling</strong> or the tray menu to stop all scheduled runs. Manual runs still work. When you resume, jobs that were due run if they are set to run missed backups.</p>
+
+<h2 id="pick">Choosing files and folders</h2>
+<p>By default a job backs up everything in its source folder. To back up only part of it, choose <strong>Choose files and folders...</strong> in the job editor. A tree of the source folder opens with a check box on every folder and file.</p>
+<ul>
+  <li>Untick anything you do not want. Unticked items are skipped.</li>
+  <li>A ticked folder includes everything inside it, <strong>including files and folders added later</strong>, so new things are never silently left out.</li>
+  <li>A folder showing a filled square is partly ticked: something inside it is unticked.</li>
+  <li>Clicking a partly ticked folder ticks everything inside it.</li>
+  <li><strong>Select all</strong> and <strong>Clear all</strong> change everything at once. At least one item must stay ticked.</li>
+  <li><strong>Back up everything</strong> in the job editor removes all unticked items.</li>
+</ul>
+<p>The tree reads folders only when you expand them, so large folders open quickly. The choices are saved as paths relative to the source folder. If you change the source folder of a job, the choices are cleared because they no longer apply.</p>
+<p>Excluded patterns (see below) work together with the tree: an item is skipped if it is unticked or matches a pattern.</p>
+
+<h2 id="excludes">Excluding files</h2>
+<p>Enter one pattern per line in the Exclude box. Patterns are not case sensitive and support <code>*</code> (any characters) and <code>?</code> (one character).</p>
+<table>
+  <tr><th>Pattern</th><th>Excludes</th></tr>
+  <tr><td><code>obj</code></td><td>Any file or folder named <code>obj</code>, at any depth.</td></tr>
+  <tr><td><code>*.tmp</code></td><td>Every file ending in <code>.tmp</code>.</td></tr>
+  <tr><td><code>logs</code></td><td>Every folder or file named <code>logs</code>.</td></tr>
+  <tr><td><code>data/cache</code></td><td>Only <code>cache</code> inside <code>data</code>, counted from the source folder. A pattern containing a slash is matched against the path from the source folder.</td></tr>
+</table>
+<p>Excluded folders are skipped completely, including everything inside them. Shortcuts and linked folders (reparse points) are not followed.</p>
+<p>If the backup folder is inside the source folder it is skipped automatically.</p>
+
+<h2 id="naming">Backup files and naming</h2>
+<p>Each backup is a single zip file. It is stored in a sub folder named after the job, inside the backup folder you chose. For a backup folder of <code>D:\Backups</code> and a job called Oxide:</p>
+<pre><code>D:\Backups\Oxide.log
+D:\Backups\Oxide\Oxide_10-17-2026_03-50-00.zip
+D:\Backups\Oxide\Oxide_10-18-2026_03-50-01.zip</code></pre>
+<p>The zip file names look like this:</p>
+<pre><code>JobName_MM-dd-yyyy_HH-mm-ss.zip
+
+Oxide_10-17-2026_03-50-00.zip
+Oxide_10-18-2026_03-50-01.zip</code></pre>
+<p>The name carries the date and the 24 hour time the backup was made, down to the second. Characters that Windows does not allow in file names are replaced with an underscore. If two backups of the same job would fall in the same second, the later one is stamped one second ahead, so a name is never reused.</p>
+<p>Each job also keeps one status log, named after the job, for example <code>Oxide.log</code>. It stays in the backup folder itself, next to the job's sub folder, not inside it. Every run adds one line: the date and time, <code>OK</code>, <code>FAILED</code> or <code>CANCELLED</code>, the zip name, the file count, size and duration. Failures show the reason, and files that could not be read are listed under the line. The log is trimmed automatically when it passes 1 MB and is never removed by the retention rules.</p>
+<p>Inside the zip, everything sits under one top level folder named after the source folder, so extracting never scatters files.</p>
+<p>A backup is written to a temporary file ending in <code>.tmp</code> and renamed only when it is complete. A failed or cancelled run never leaves a partial zip behind.</p>
+
+<h2 id="retention">Keeping backups</h2>
+<p>Two limits are available. Use either, both, or neither. A value of 0 means no limit.</p>
+<ul>
+  <li><strong>Delete backups older than X days.</strong> With 30, today and the previous 29 days are kept.</li>
+  <li><strong>Keep only the newest X backups.</strong> Useful for jobs that run several times a day.</li>
+</ul>
+<p>When both are set, a backup is removed if it breaks either limit.</p>
+<ul>
+  <li>Cleanup runs only after a new backup finishes successfully, so a failing job never deletes its older backups.</li>
+  <li>The backup just created is never deleted.</li>
+  <li>Only files that match the job's own naming pattern are ever deleted. Other files in the job's sub folder are left alone.</li>
+</ul>
+<div class="note warn"><strong>Job names are unique.</strong> Retention matches files by job name, so two jobs can never share a name.</div>
+
+<h2 id="restore">Restoring</h2>
+<p>Select a job and choose <strong>Open backups</strong>, then open or extract the zip you want with Windows Explorer or an archive tool. TrayBAK does not restore files itself, so nothing is overwritten by accident.</p>
+<p>Files that were in use when the backup ran are read with shared access. A file that is being written at that moment can be captured part way through. For applications that keep complex data files, schedule backups for a quiet time of day.</p>
+<p>A file that cannot be read at all, such as one locked exclusively, is skipped and counted. The job details and the log show how many were skipped.</p>
+
+<h2 id="tray">The tray icon</h2>
+<p>TrayBAK lives in the notification area. If you do not see it, open the hidden icons arrow next to the clock and drag the icon onto the taskbar to keep it visible.</p>
+<table>
+  <tr><th>Action</th><th>Result</th></tr>
+  <tr><td>Hover</td><td>Tooltip with each job's last result and the next scheduled run.</td></tr>
+  <tr><td>Click</td><td>Status popup listing every job, with a <strong>Run</strong> button for each, plus <strong>Open TrayBAK</strong> and a pause or resume button. It closes when you click anywhere else.</td></tr>
+  <tr><td>Double-click</td><td>Opens the main window.</td></tr>
+  <tr><td>Right-click</td><td>Menu: Open TrayBAK, Run backup now, Job status, Pause scheduling (or Resume scheduling), View log, Options, Help and About, Exit.</td></tr>
+</table>
+<p>In the right-click menu, <strong>Run backup now</strong> lists every job with its last result, plus <em>All enabled jobs</em>. <strong>Job status</strong> lists every job and opens its schedule, last run, last backup size and next run, with a shortcut to <em>Open backup folder</em>.</p>
+<h3>Icon badge</h3>
+<table>
+  <tr><th>Badge</th><th>Meaning</th></tr>
+  <tr><td>None</td><td>Idle, everything is fine.</td></tr>
+  <tr><td>Blue dot</td><td>A backup is running or queued.</td></tr>
+  <tr><td>Red dot</td><td>An enabled job's last run failed. It clears after that job succeeds, or when it is disabled.</td></tr>
+  <tr><td>Grey dot</td><td>Scheduling is paused.</td></tr>
+</table>
+<p>Closing the main window hides it to the tray. Use <strong>File &gt; Exit</strong> or the tray menu to quit completely. If a backup is running you are asked first.</p>
+
+<h2 id="alerts">Alerts</h2>
+<p>Each job can alert when a backup completes, when it fails, or both. By default only failures alert.</p>
+<ul>
+  <li><strong>Popup:</strong> a small message above the tray. Click it to dismiss. Errors stay a little longer.</li>
+  <li><strong>Sound:</strong> the standard Windows sounds for information and errors.</li>
+</ul>
+<p>Popups and sounds can be switched off in <strong>Tools &gt; Options</strong>. Cancelled backups do not alert.</p>
+
+<h2 id="log">The log</h2>
+<p>Everything TrayBAK does is recorded: starts, completions, failures, skipped files, job changes, pausing, and program start and stop. The lower half of the main window shows the newest entries.</p>
+<p>Open <strong>View &gt; Log viewer</strong> to filter by level or job and to search the text. Entries are kept for the number of days set in Options.</p>
+<p>The program log is also a plain text file, <code>logs\traybak.log</code>, with one line per event: date and time, level, job and message. Use <strong>View &gt; Open logs folder</strong> to find it. Each job also keeps its own status log in its backup folder, described under <a href="#naming">Backup files and naming</a>.</p>
+
+<h2 id="options">Options</h2>
+<table>
+  <tr><th>Option</th><th>Description</th></tr>
+  <tr><td>Start when I sign in to Windows</td><td>Adds TrayBAK to your Windows startup for your account only.</td></tr>
+  <tr><td>Start hidden in the tray</td><td>Starts without showing the main window.</td></tr>
+  <tr><td>Closing keeps running</td><td>When off, closing the main window exits TrayBAK.</td></tr>
+  <tr><td>Theme</td><td>Follow Windows, Light or Dark.</td></tr>
+  <tr><td>Popup and sound</td><td>Turns local alerts on or off for all jobs.</td></tr>
+  <tr><td>Retry failed scheduled backups</td><td>Whether to try again, how many times (1 to 10), and how many minutes to wait between tries (1 to 1440). The defaults are on, 3 times, 10 minutes.</td></tr>
+  <tr><td>Log days</td><td>How long log entries are kept. Applied when TrayBAK starts.</td></tr>
+</table>
+<div class="note warn">TrayBAK only runs backups while it is running and you are signed in. Turn on <em>Start when I sign in to Windows</em> for unattended schedules.</div>
+
+<h2 id="files">Where things are stored</h2>
+<table>
+  <tr><th>Item</th><th>Location</th></tr>
+  <tr><td>Settings and jobs</td><td><code>config\settings.json</code> in the folder that holds TrayBAK.exe</td></tr>
+  <tr><td>Program log</td><td><code>logs\traybak.log</code> in the same folder. Plain text, one line per event: date and time, level, job, message.</td></tr>
+  <tr><td>Error details</td><td><code>logs\errors.log</code> is written only if TrayBAK hits an unexpected error. It holds the technical details.</td></tr>
+  <tr><td>Backups and their logs</td><td>The backup folder you choose for each job. Zips are in a sub folder named after the job. The job's log file is in the backup folder itself.</td></tr>
+</table>
+<p><strong>Tools &gt; Options &gt; Open logs folder</strong> (also under View) opens the <code>logs</code> folder.</p>
+<p>TrayBAK is portable. Nothing is stored in AppData or the registry, except the optional <em>Start when I sign in</em> setting, which records the program's current location. To move TrayBAK to another PC or drive, copy the whole folder, including <code>config</code> (and <code>logs</code> if you want the history). The folder must be one you can write to, so do not put it in Program Files.</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3>The job says Failed</h3>
+<p>Select the job and read the <em>Details</em> column, or open the log. Common causes: the source folder was moved or renamed, the backup drive or network share is offline, or the backup drive is full.</p>
+<h3>A job did not run at its time</h3>
+<ul>
+  <li>Is the job enabled and is scheduling paused?</li>
+  <li>Was TrayBAK running at that time? It only runs while open in the tray.</li>
+  <li>Check the <em>Next run</em> column for the time TrayBAK expects.</li>
+</ul>
+<h3>Some files were skipped</h3>
+<p>Those files were locked by another program. Exclude them if they do not matter, or schedule the job for a time when they are not in use.</p>
+<h3>Backups are not being deleted</h3>
+<p>Retention only touches files named exactly like <code>JobName_MM-dd-yyyy_HH-mm-ss.zip</code> in the job's sub folder, and only after a successful backup. Backups made by hand and copied there with a different name are never touched.</p>
+<h3>The icon is missing</h3>
+<p>Check the hidden icons arrow next to the clock. If TrayBAK was started a second time, it simply brings the first copy forward.</p>
+<h3>TrayBAK does not start, or Windows asks for .NET</h3>
+<p>Install the Microsoft .NET 10 Desktop Runtime (64 bit) on the PC. TrayBAK does not bundle it.</p>
+<h3>TrayBAK says it cannot write to its config folder</h3>
+<p>TrayBAK keeps its settings and logs in folders next to <code>TrayBAK.exe</code>. Move the whole TrayBAK folder to a place you can write to, such as a folder in Documents or on another drive, not Program Files.</p>
+<h3>An error popup appeared</h3>
+<p>TrayBAK caught an unexpected problem and carried on. A short line is in the log and the technical details are in <code>logs\errors.log</code>. Keep that file if you need to report the problem.</p>
+</main>
+</div>
+</body>
+</html>
