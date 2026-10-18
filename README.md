@@ -1,6 +1,6 @@
 # TrayBAK
 
-Version v0.0.22
+Version v0.0.25
 
 A small Windows tray app that backs up folders to zip files on a schedule.
 
@@ -24,7 +24,7 @@ TrayBAK sits in the system tray, runs your backup jobs when they are due, keeps 
 - Log viewer with filters, Options, About, and a built-in Help page.
 - Dark, light or follow the Windows theme.
 - Single instance. Starting a second copy brings the first one forward.
-
+****
 ## Requirements
 
 - Windows 10 or 11, 64-bit.

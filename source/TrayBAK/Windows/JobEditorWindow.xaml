@@ -69,17 +69,17 @@
                         </ComboBox>
                         <StackPanel x:Name="IntervalPanel" Orientation="Horizontal" Margin="0,0,0,8">
                             <TextBlock Text="Run every" VerticalAlignment="Center" />
-                            <TextBox x:Name="IntervalBox" Width="70" Margin="8,0" />
+                            <TextBox x:Name="IntervalBox" Width="100" Margin="8,0" />
                             <TextBlock Text="minutes" VerticalAlignment="Center" />
                         </StackPanel>
                         <StackPanel x:Name="HourlyPanel" Orientation="Horizontal" Margin="0,0,0,8">
                             <TextBlock Text="Run at minute" VerticalAlignment="Center" />
-                            <TextBox x:Name="MinuteBox" Width="70" Margin="8,0" />
+                            <TextBox x:Name="MinuteBox" Width="100" Margin="8,0" />
                             <TextBlock Text="past every hour (0-59)" VerticalAlignment="Center" />
                         </StackPanel>
                         <StackPanel x:Name="TimePanel" Orientation="Horizontal" Margin="0,0,0,8">
                             <TextBlock Text="Run at" VerticalAlignment="Center" />
-                            <TextBox x:Name="TimeBox" Width="70" Margin="8,0" />
+                            <TextBox x:Name="TimeBox" Width="100" Margin="8,0" />
                             <TextBlock Text="(24 hour, HH:mm)" VerticalAlignment="Center" />
                         </StackPanel>
                         <WrapPanel x:Name="DaysPanel" Margin="0,0,0,8">
@@ -99,12 +99,12 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                             <TextBlock Text="Delete backups older than" VerticalAlignment="Center" />
-                            <TextBox x:Name="KeepDaysBox" Width="60" Margin="8,0" />
+                            <TextBox x:Name="KeepDaysBox" Width="100" Margin="8,0" />
                             <TextBlock Text="days (0 = never)" VerticalAlignment="Center" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Keep only the newest" VerticalAlignment="Center" />
-                            <TextBox x:Name="KeepCountBox" Width="60" Margin="8,0" />
+                            <TextBox x:Name="KeepCountBox" Width="100" Margin="8,0" />
                             <TextBlock Text="backups (0 = no limit)" VerticalAlignment="Center" />
                         </StackPanel>
                     </StackPanel>

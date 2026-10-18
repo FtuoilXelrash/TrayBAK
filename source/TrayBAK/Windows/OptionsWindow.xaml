@@ -11,7 +11,7 @@
                 <CheckBox x:Name="CloseToTrayBox" Content="Closing the window keeps TrayBAK running in the tray" Margin="0,0,0,10" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Theme" VerticalAlignment="Center" Width="60" />
-                    <ComboBox x:Name="ThemeBox" Width="140">
+                    <ComboBox x:Name="ThemeBox" Width="190">
                         <ComboBoxItem Content="Follow Windows" />
                         <ComboBoxItem Content="Light" />
                         <ComboBoxItem Content="Dark" />
@@ -32,9 +32,9 @@
                 <CheckBox x:Name="RetryBox" Content="Retry a failed scheduled backup" Margin="0,0,0,8" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Retry up to" VerticalAlignment="Center" />
-                    <TextBox x:Name="RetryCountBox" Width="50" Margin="8,0" />
+                    <TextBox x:Name="RetryCountBox" Width="90" Margin="8,0" />
                     <TextBlock Text="times, waiting" VerticalAlignment="Center" />
-                    <TextBox x:Name="RetryDelayBox" Width="50" Margin="8,0" />
+                    <TextBox x:Name="RetryDelayBox" Width="90" Margin="8,0" />
                     <TextBlock Text="minutes between tries" VerticalAlignment="Center" />
                 </StackPanel>
                 <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource MutedBrush}"
@@ -44,7 +44,7 @@
         <GroupBox Header="Log" Padding="8" Margin="0,0,0,12">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Keep log entries for" VerticalAlignment="Center" />
-                <TextBox x:Name="LogDaysBox" Width="60" Margin="8,0" />
+                <TextBox x:Name="LogDaysBox" Width="90" Margin="8,0" />
                 <TextBlock Text="days (0 = forever)" VerticalAlignment="Center" />
             </StackPanel>
         </GroupBox>

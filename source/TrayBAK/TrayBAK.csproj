@@ -10,9 +10,9 @@
     <RootNamespace>TrayBAK</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Version>0.0.22</Version>
-    <AssemblyVersion>0.0.22.0</AssemblyVersion>
-    <FileVersion>0.0.22.0</FileVersion>
+    <Version>0.0.25</Version>
+    <AssemblyVersion>0.0.25.0</AssemblyVersion>
+    <FileVersion>0.0.25.0</FileVersion>
     <Company>Ftuoil Xelrash</Company>
     <Authors>Ftuoil Xelrash</Authors>
     <Product>TrayBAK</Product>
