@@ -1,0 +1,59 @@
+<Window x:Class="TrayBAK.Windows.OptionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Options" Width="480" SizeToContent="Height" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <StackPanel Margin="16">
+        <GroupBox Header="Startup and window" Padding="8" Margin="0,0,0,12">
+            <StackPanel>
+                <CheckBox x:Name="StartWithWindowsBox" Content="Start TrayBAK when I sign in to Windows" Margin="0,0,0,6" />
+                <CheckBox x:Name="StartMinimizedBox" Content="Start hidden in the tray" Margin="0,0,0,6" />
+                <CheckBox x:Name="CloseToTrayBox" Content="Closing the window keeps TrayBAK running in the tray" Margin="0,0,0,10" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Theme" VerticalAlignment="Center" Width="60" />
+                    <ComboBox x:Name="ThemeBox" Width="140">
+                        <ComboBoxItem Content="Follow Windows" />
+                        <ComboBoxItem Content="Light" />
+                        <ComboBoxItem Content="Dark" />
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Alerts" Padding="8" Margin="0,0,0,12">
+            <StackPanel>
+                <CheckBox x:Name="PopupBox" Content="Show a popup near the tray" Margin="0,0,0,6" />
+                <CheckBox x:Name="SoundBox" Content="Play a sound" />
+                <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource MutedBrush}"
+                           Text="Which events alert is set on each job." />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Failed scheduled backups" Padding="8" Margin="0,0,0,12">
+            <StackPanel>
+                <CheckBox x:Name="RetryBox" Content="Retry a failed scheduled backup" Margin="0,0,0,8" />
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Retry up to" VerticalAlignment="Center" />
+                    <TextBox x:Name="RetryCountBox" Width="50" Margin="8,0" />
+                    <TextBlock Text="times, waiting" VerticalAlignment="Center" />
+                    <TextBox x:Name="RetryDelayBox" Width="50" Margin="8,0" />
+                    <TextBlock Text="minutes between tries" VerticalAlignment="Center" />
+                </StackPanel>
+                <TextBlock Margin="0,8,0,0" TextWrapping="Wrap" Foreground="{StaticResource MutedBrush}"
+                           Text="Applies to scheduled backups only. A backup you start yourself is never retried. A failure alert is shown only after the last try fails." />
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Log" Padding="8" Margin="0,0,0,12">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Keep log entries for" VerticalAlignment="Center" />
+                <TextBox x:Name="LogDaysBox" Width="60" Margin="8,0" />
+                <TextBlock Text="days (0 = forever)" VerticalAlignment="Center" />
+            </StackPanel>
+        </GroupBox>
+        <DockPanel>
+            <Button Content="Open logs folder" DockPanel.Dock="Left" Click="OpenLogs_Click" Padding="12,4" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="OK" IsDefault="True" Width="90" Click="Ok_Click" />
+                <Button Content="Cancel" IsCancel="True" Width="90" Margin="8,0,0,0" />
+            </StackPanel>
+        </DockPanel>
+    </StackPanel>
+</Window>
