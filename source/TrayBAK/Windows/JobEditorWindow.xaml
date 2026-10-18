@@ -1,0 +1,122 @@
+<Window x:Class="TrayBAK.Windows.JobEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Backup Job" Width="640" Height="720" MinWidth="560" MinHeight="520"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="16,8,16,16">
+            <Button Content="Save" IsDefault="True" Width="96" Click="Save_Click" />
+            <Button Content="Cancel" IsCancel="True" Width="96" Margin="8,0,0,0" />
+        </StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="16,16,16,0">
+                <GroupBox Header="Job" Padding="8" Margin="0,0,0,12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Name" VerticalAlignment="Center" />
+                        <TextBox x:Name="NameBox" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,8" />
+                        <TextBlock Text="Source folder" Grid.Row="1" VerticalAlignment="Center" />
+                        <TextBox x:Name="SourceBox" Grid.Row="1" Grid.Column="1" Margin="0,0,8,8" />
+                        <Button Content="Browse..." Grid.Row="1" Grid.Column="2" Margin="0,0,0,8" Click="BrowseSource_Click" />
+                        <TextBlock Text="Backup folder" Grid.Row="2" VerticalAlignment="Center" />
+                        <TextBox x:Name="DestBox" Grid.Row="2" Grid.Column="1" Margin="0,0,8,8" />
+                        <Button Content="Browse..." Grid.Row="2" Grid.Column="2" Margin="0,0,0,8" Click="BrowseDest_Click" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,8" TextWrapping="Wrap"
+                                   Foreground="{StaticResource MutedBrush}"
+                                   Text="Zips go in a sub folder named after the job. The job's log file stays in the backup folder itself." />
+                        <CheckBox x:Name="EnabledBox" Content="Job enabled" Grid.Row="4" Grid.Column="1" />
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="What to back up" Padding="8" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock x:Name="SelectionText" TextWrapping="Wrap" Margin="0,0,0,8" />
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Choose files and folders..." Click="ChooseItems_Click" Padding="12,4" />
+                            <Button x:Name="ResetSelectionButton" Content="Back up everything" Click="ResetSelection_Click"
+                                    Margin="8,0,0,0" Padding="12,4" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Exclude from backup" Padding="8" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,6" Foreground="{StaticResource MutedBrush}"
+                                   Text="One per line. Folder or file names with * and ? wildcards, for example: obj, *.tmp, logs, data/cache. These apply on top of the files and folders chosen above." />
+                        <TextBox x:Name="ExcludeBox" AcceptsReturn="True" Height="90" VerticalScrollBarVisibility="Auto" />
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Schedule" Padding="8" Margin="0,0,0,12">
+                    <StackPanel>
+                        <ComboBox x:Name="ScheduleBox" SelectionChanged="Schedule_Changed" Margin="0,0,0,8">
+                            <ComboBoxItem Content="Manual only (run from the app or tray)" />
+                            <ComboBoxItem Content="Every X minutes" />
+                            <ComboBoxItem Content="Hourly" />
+                            <ComboBoxItem Content="Daily at a set time" />
+                            <ComboBoxItem Content="Weekly on chosen days" />
+                        </ComboBox>
+                        <StackPanel x:Name="IntervalPanel" Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="Run every" VerticalAlignment="Center" />
+                            <TextBox x:Name="IntervalBox" Width="70" Margin="8,0" />
+                            <TextBlock Text="minutes" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel x:Name="HourlyPanel" Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="Run at minute" VerticalAlignment="Center" />
+                            <TextBox x:Name="MinuteBox" Width="70" Margin="8,0" />
+                            <TextBlock Text="past every hour (0-59)" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel x:Name="TimePanel" Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="Run at" VerticalAlignment="Center" />
+                            <TextBox x:Name="TimeBox" Width="70" Margin="8,0" />
+                            <TextBlock Text="(24 hour, HH:mm)" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <WrapPanel x:Name="DaysPanel" Margin="0,0,0,8">
+                            <CheckBox x:Name="DayMon" Content="Mon" Margin="0,0,12,0" />
+                            <CheckBox x:Name="DayTue" Content="Tue" Margin="0,0,12,0" />
+                            <CheckBox x:Name="DayWed" Content="Wed" Margin="0,0,12,0" />
+                            <CheckBox x:Name="DayThu" Content="Thu" Margin="0,0,12,0" />
+                            <CheckBox x:Name="DayFri" Content="Fri" Margin="0,0,12,0" />
+                            <CheckBox x:Name="DaySat" Content="Sat" Margin="0,0,12,0" />
+                            <CheckBox x:Name="DaySun" Content="Sun" Margin="0,0,12,0" />
+                        </WrapPanel>
+                        <CheckBox x:Name="RunMissedBox" Content="Run a missed backup when TrayBAK or the PC is back on" />
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Keep backups" Padding="8" Margin="0,0,0,12">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <TextBlock Text="Delete backups older than" VerticalAlignment="Center" />
+                            <TextBox x:Name="KeepDaysBox" Width="60" Margin="8,0" />
+                            <TextBlock Text="days (0 = never)" VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Keep only the newest" VerticalAlignment="Center" />
+                            <TextBox x:Name="KeepCountBox" Width="60" Margin="8,0" />
+                            <TextBlock Text="backups (0 = no limit)" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Alerts" Padding="8" Margin="0,0,0,12">
+                    <StackPanel>
+                        <CheckBox x:Name="AlertSuccessBox" Content="Alert when a backup completes" Margin="0,0,0,6" />
+                        <CheckBox x:Name="AlertFailureBox" Content="Alert when a backup fails" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
