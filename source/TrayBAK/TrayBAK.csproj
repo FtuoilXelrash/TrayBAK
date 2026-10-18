@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>TrayBAK</AssemblyName>
+    <RootNamespace>TrayBAK</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Version>0.0.20</Version>
+    <AssemblyVersion>0.0.20.0</AssemblyVersion>
+    <FileVersion>0.0.20.0</FileVersion>
+    <Company>Ftuoil Xelrash</Company>
+    <Authors>Ftuoil Xelrash</Authors>
+    <Product>TrayBAK</Product>
+    <Copyright>Copyright © 2026 Ftuoil Xelrash</Copyright>
+    <ApplicationIcon>..\..\resources\images\TrayBAK.ico</ApplicationIcon>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <NoWarn>$(NoWarn);WPF0001</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="..\..\resources\images\TrayBAK.ico" Link="resource\TrayBAK.ico" />
+    <Resource Include="..\..\resources\images\TrayBAK.png" Link="resource\TrayBAK.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\resources\help\TrayBAK-Help.html" Link="TrayBAK-Help.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Drawing" />
+    <Using Remove="System.Windows.Forms" />
+  </ItemGroup>
+
+</Project>
